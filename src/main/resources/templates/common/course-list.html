@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- saved from url=(0023)http://jwc.whut.edu.cn/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>教学资源平台</title>
+    <link th:href="@{/whut/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/whut/index.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/whut/font-awesome.min.css}" rel="stylesheet">
+    <!--[if IE 7]>
+    <link rel="stylesheet" th:href="@{/whut/font-awesome.min.css}">
+    <![endif]-->
+    <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/whut/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/whut/bootstrap.js}" type="text/javascript"></script>
+    <script th:src="@{/whut/common.js}"></script>
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="icon" type="image/png" th:href="@{/img/whut_logo.png}" sizes="16x16">
+</head>
+
+<body>
+<!--导航栏-->
+    <header class="in-nav container-fluid clearfix">
+        <div class="in-logo">
+            <a href="http://i.whut.edu.cn/" target="_blank">
+                <img th:src="@{/img/in-logo.jpg}">
+            </a>
+        </div>
+        <div class="in-nav-list container">
+            <ul class="clearfix">
+                <li class="active"><a th:href="@{/index}">首页</a></li>
+                <li><a th:href="@{/course/list}">课程</a></li>
+                <li><a th:href="@{/course/search}">教学资源搜索</a></li>
+                <li class="pull-right">
+                    <a th:href="@{/student/index}" target="_blank">我的</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+
+    <!--clearfix开始-->
+    <div class="f-main clearfix">
+
+        <!-- 二级分类-start -->
+        <div class="course-nav-row clearfix">
+            <span class="hd">分类：</span>
+            <ul class="course-nav">
+                <li th:class="${collegeId}==0?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list">全部</a>
+                </li>
+                <li th:class="${collegeId}==1?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=1">计算机</a>
+                </li>
+                <li th:class="${collegeId}==2?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=2">信息</a>
+                </li>
+                <li th:class="${collegeId}==3?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=3">外国语</a>
+                </li>
+                <li th:class="${collegeId}==4?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=4">材料学院</a>
+                </li>
+                <li th:class="${collegeId}==5?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=5">航海学院</a>
+                </li>
+                <li th:class="${collegeId}==6?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=6">物流学院</a>
+                </li>
+                <li th:class="${collegeId}==7?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=7">理学院</a>
+                </li>
+                <li th:class="${collegeId}==8?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=8">马克思学院</a>
+                </li>
+                <li th:class="${collegeId}==9?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=9">政治学院</a>
+                </li>
+                <li th:class="${collegeId}==10?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=10">土木学院</a>
+                </li>
+                <li th:class="${collegeId}==11?'course-nav-item cur-course-nav':'course-nav-item'">
+                    <a href="/course/list?collegeId=11">机械学院</a>
+                </li>
+            </ul>
+        </div>
+        <!-- 二级分类-end -->
+
+        <!-- 课程列表-start -->
+        <div class="types-block clearfix" style="padding:0px;">
+            <h3 style="margin-bottom: 20px;">
+                <span class="types-title" style="margin-right:40px;">课程列表</span>
+            </h3>
+            <div class="types-content clearfix" style="margin-bottom: 20px;">
+
+                <div th:each="course,courseStat:${pageResult.content}">
+                    <a th:href="@{/course/learn(id=${course.id})}">
+                        <div class="course-card-container" th:if="${courseStat.index%5==0}">
+                            <div class="course-card-top blue-bg">
+                                <span>[[${course.name}]]</span>
+                            </div>
+                            <div class="course-card-content">
+                                <h3 class="course-card-name"><br>[[${course.college}]]</h3>
+                                <p>[[${course.teacher}]]</p>
+                                <p>[[${course.intro}]]</p>
+                            </div>
+                        </div>
+                        <div class="course-card-container" th:if="${courseStat.index%5==1}">
+                        <div class="course-card-top green-bg">
+                            <span>[[${course.name}]]</span>
+                        </div>
+                        <div class="course-card-content">
+                            <h3 class="course-card-name"><br>[[${course.college}]]</h3>
+                            <p>[[${course.teacher}]]</p>
+                            <p>[[${course.intro}]]</p>
+                        </div>
+                    </div>
+                        <div class="course-card-container" th:if="${courseStat.index%5==2}">
+                        <div class="course-card-top purple-bg">
+                            <span>[[${course.name}]]</span>
+                        </div>
+                        <div class="course-card-content">
+                            <h3 class="course-card-name"><br>[[${course.college}]]</h3>
+                            <p>[[${course.teacher}]]</p>
+                            <p>[[${course.intro}]]</p>
+                        </div>
+                    </div>
+                        <div class="course-card-container" th:if="${courseStat.index%5==3}">
+                            <div class="course-card-top gray-bg">
+                                <span>[[${course.name}]]</span>
+                            </div>
+                            <div class="course-card-content">
+                                <h3 class="course-card-name"><br>[[${course.college}]]</h3>
+                                <p>[[${course.teacher}]]</p>
+                                <p>[[${course.intro}]]</p>
+                            </div>
+                        </div>
+                    <div class="course-card-container" th:if="${courseStat.index%5==4}" style="margin-right: 0px;">
+                        <div class="course-card-top pink-bg">
+                            <span>[[${course.name}]]</span>
+                        </div>
+                        <div class="course-card-content">
+                            <h3 class="course-card-name"><br>[[${course.college}]]</h3>
+                            <p>[[${course.teacher}]]</p>
+                            <p>[[${course.intro}]]</p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <!-- 课程列表-end -->
+
+        <!-- 分页-start -->
+        <div class="page-box clearfix" th:if="${collegeId}==0">
+        <div class="page clearfix">
+            <div style="float:left;">
+                <a class="page-next" th:href="@{/course/list}" >首 页</a>
+                <a class="page-next" th:href="@{/course/list(pageNum=${pageResult.pageNum}>1?${pageResult.pageNum}-1:1)}">上一页</a>
+                <li th:each="page:${#numbers.sequence(1, pageResult.totalPages)}" style="float: left;">
+                    <a th:class="${pageResult.pageNum}==${page}?'page-cur':'page-num'" th:href="@{/course/list(pageNum=${page})}">[[${page}]]</a>
+                </li>
+                <a class="page-next"  th:href="@{/course/list(pageNum=${pageResult.totalPages}>${pageResult.pageNum}?${pageResult.pageNum}+1:1)}">下一页</a>
+                <a class="page-next" th:href="@{/course/list(pageNum=${pageResult.totalPages})}">尾 页</a>
+            </div>
+        </div>
+    </div>
+    <div class="page-box clearfix" th:if="${collegeId}!=0">
+        <div class="page clearfix">
+            <div style="float:left;">
+                <a class="page-next" th:href="@{/course/list(collegeId=${collegeId})}" >首 页</a>
+                <a class="page-next" th:href="@{/course/list(pageNum=${pageResult.pageNum}>1?${pageResult.pageNum}-1:1,collegeId=${collegeId})}">上一页</a>
+                <li th:if="${pageResult.totalPages}>1" th:each="page:${#numbers.sequence(1, pageResult.totalPages)}" style="float: left;">
+                    <a th:class="${pageResult.pageNum}==${page}?'page-cur':'page-num'" th:href="@{/course/list(pageNum=${page},collegeId=${collegeId})}">[[${page}]]</a>
+                </li>
+                <a class="page-next"  th:href="@{/course/list(pageNum=${pageResult.totalPages}>${pageResult.pageNum}?${pageResult.pageNum}+1:1,collegeId=${collegeId})}">下一页</a>
+                <a class="page-next" th:href="@{/course/list(pageNum=${pageResult.totalPages},collegeId=${collegeId})}">尾 页</a>
+            </div>
+        </div>
+    </div>
+        <!-- 分页-end -->
+    </div>
+    <!--clearfix开始-->
+    <!--公共底部-->
+    <br><br><br><br>
+</body>
+</html>

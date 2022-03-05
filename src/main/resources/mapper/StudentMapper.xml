@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeng.course.dao.StudentMapper">
+	<resultMap id="BaseResultMap" type="com.zeng.course.model.Student">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="stuNum" property="stuNum" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="college" property="college" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="tel" property="tel" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<select id="login" resultMap="BaseResultMap">
+		SELECT s.id,s.stuNum, s.name, c.name AS college,
+        CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,s.tel,s.username,s.password FROM
+		student AS s JOIN college AS c ON s.collegeId = c.id where username=#{username} and password=#{password};
+	</select>
+
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM student;
+	</select>
+
+	<select id="selectStudent" resultMap="BaseResultMap">
+		SELECT s.id,s.stuNum, s.name, c.name AS college,
+        CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,s.tel,s.username,s.password FROM
+		student AS s JOIN college AS c ON s.collegeId = c.id
+	</select>
+
+	<select id="selectStudentByStuNum" resultMap="BaseResultMap" parameterType="String">
+		SELECT s.id,s.stuNum, s.name, c.name AS college,
+		CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,s.tel,s.username,s.password FROM
+		student AS s JOIN college AS c ON s.collegeId = c.id WHERE s.stuNum=#{stuNum}
+	</select>
+
+	<select id="selectStudentByParams" resultMap="BaseResultMap">
+		SELECT s.id,s.stuNum, s.name, c.name AS college,
+		CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,s.tel,s.username,s.password FROM
+		student AS s JOIN college AS c ON s.collegeId = c.id
+		<where>
+			<if test="collegeId!=0">s.collegeId= #{collegeId}</if>
+			<if test="name!='学生姓名'">AND s.name like "%"#{name}"%"</if>
+		</where>
+	</select>
+
+	<select id="selectStudentById" resultMap="BaseResultMap">
+		SELECT s.id,s.stuNum, s.name, c.name AS college,
+		CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,s.tel,s.username,s.password FROM
+		student AS s JOIN college AS c ON s.collegeId = c.id WHERE  s.id=#{id}
+	</select>
+
+
+	<delete id="deleteStudentByIds"  parameterType = "java.util.List">
+		delete from student where 1>2
+		or id in
+		<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="insertStudent" parameterType="Map">
+		INSERT into student (name, stuNum,collegeId, gender,tel,
+		username, password) VALUES (#{name}, #{stuNum},#{collegeId}, #{gender},#{tel},#{username}, #{password})
+	</insert>
+
+	<insert id="updateStudent" parameterType="Map">
+		UPDATE student SET name=#{name}, stuNum=#{stuNum},collegeId=#{collegeId}, gender=#{gender},tel=#{tel},
+		username=#{username}, password=#{password} WHERE id=#{id}
+	</insert>
+	<update id="updateStudentByModel" parameterType="Map">
+		UPDATE student SET name=#{name},,tel=#{tel},
+		username=#{username}, password=#{password} WHERE id=#{id}
+	</update>
+
+	<select id="selectStudentFollowId" parameterType="Integer" resultType="Integer">
+		select studentId
+		from teacher_follow where teacherId=#{teacherId}
+	</select>
+
+</mapper>

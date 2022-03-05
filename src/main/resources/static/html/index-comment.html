@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)http://jwc.whut.edu.cn/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>教学资源平台</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="../whut/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../whut/index.css" rel="stylesheet" type="text/css">
+    <link href="../whut/font-awesome.min.css" rel="stylesheet">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../whut/font-awesome.min.css">
+    <![endif]-->
+    <link href="../css/reset.css" rel="stylesheet" type="text/css"/>
+    <script src="../whut/jquery.min.js" type="text/javascript"></script>
+    <script src="../whut/bootstrap.js" type="text/javascript"></script>
+    <script src="../whut/common.js"></script>
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!--导航栏-->
+    <header class="in-nav container-fluid clearfix">
+    <div class="in-logo">
+        <a href="http://i.whut.edu.cn/" target="_blank">
+            <img src="../img/in-logo.jpg">
+        </a>
+    </div>
+    <div class="in-nav-list container">
+        <ul class="clearfix">
+            <li class="active"><a href="http://jwc.whut.edu.cn/Web/Index">首页</a></li>
+            <li><a href="http://jwc.whut.edu.cn/Web/List?type=010303">我的</a></li>
+        </ul>
+    </div>
+</header>
+
+
+    <div class="f-main clearfix">
+        <!-- 基本信息 -->
+        <div class="main-course-left">
+            <div class="course-info">
+                <div class="course-title">带您完成神秘的涟漪按钮效果-入门篇</div>
+
+                <div style="margin-top: 5%">
+                    <a href="${s.base}/course/video.html" class="learn-btn" >添加收藏</a>
+                </div>
+
+
+                <div class="course-brief">
+                    简介：安卓声音录制与播放功能实现，包括录制到文件、播放文件，可以实现类似于微信的语音消息发送与播放，还包括录制到字节流，从字节流播放，可以实现视频直播/实时对讲功能中的声音录制和播放。 Android大牛齐聚之地，这里总有人为你答疑解惑！慕课网Android讨论群 556384357
+                </div>
+
+                <div class="course-menu">
+                    <a  href=""><span class="menu-item">章节</span></a>
+                    <a href="#" id="homework"><span class="menu-item cur">作业</span></a>
+                </div>
+            </div>
+            <!-- 基本信息-end -->
+            <!-- 作业窗口-start -->
+            <div id="divComment" style="display: none">
+                <div class="comment clearfix">
+                    <div class="comment-header"><img class="lecturer-uimg" src="../img/user6-128x128.jpg"></div>
+                    <div class="comment-main">
+                        <div class="user-name">第一章作业</div>
+                        <div class="comment-content">对计算机网络概述的笔记请按时上传！
+                        </div>
+                        <div class="comment-footer">发布时间：2021-02-05
+                        </div><br>
+                        <button type="button" class="btn btn-sm">点击上传</button>&ensp;&ensp;&ensp;
+                        <button type="button" class="btn btn-sm">查看详情</button>
+                    </div>
+                </div>
+
+                <div class="comment clearfix">
+                    <div class="comment-header"><img class="lecturer-uimg" src="../img/user6-128x128.jpg"></div>
+                    <div class="comment-main">
+                        <div class="user-name">我是张三</div>
+                        <div class="comment-content">这门课真实用！一个列表嵌套好多种布局的时候，用recyclerview控件优雅实现，效率果然提高不少，老板肯定又会夸我，啊哈哈！！！</div>
+                        <div class="comment-footer">时间：2021-12-05
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 作业窗口-end -->
+
+        </div>
+
+        <!-- 教师信息- start -->
+        <div class="main-course-right"  >
+
+            <div class="lecturer-item" style="width: 100%;">
+                <img class="lecturer-uimg" src="../img/user6-128x128.jpg">
+                <span class="lecturer-name">王阳明</span>
+                <span class="lecturer-title">中华大学</span>
+                <span class="lecturer-p" >中华大学高级讲师，擅长写代码</span>
+                <a href="javascript:void(0)" ><span class="follow-btn" ></span></a>
+            </div>
+
+        </div>
+        <!-- 教师信息&推荐课程 - end -->
+
+    </div>
+<br><br><br><br>
+</body>
+<script type="text/javascript">
+    $(function(){
+        $('.chapter li').hover(function(){
+            $(this).find('.icon-video').css('color','#FFF');
+        },function(){
+            $(this).find('.icon-video').css('color','#777');
+        });
+
+        $('.js-open').click(function(){
+            var display = $(this).parent().find('ul').css('display');
+            if(display == 'none'){
+                $(this).parent().find('ul').css('display','block');
+                $(this).find('.drop-down').html('▼');
+            }else{
+                $(this).parent().find('ul').css('display','none');
+                $(this).find('.drop-down').html('▲');
+            }
+        });
+        $('#divComment').hide();
+
+        $('#homework').click(function () {
+            $('#divComment').show();
+        })
+    });
+
+</script>
+</html>

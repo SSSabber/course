@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)http://jwc.whut.edu.cn/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>教学资源平台</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="../whut/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../whut/index.css" rel="stylesheet" type="text/css">
+    <link href="../whut/font-awesome.min.css" rel="stylesheet">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../whut/font-awesome.min.css">
+    <![endif]-->
+    <link href="../css/reset.css" rel="stylesheet" type="text/css"/>
+    <script src="../whut/jquery.min.js" type="text/javascript"></script>
+    <script src="../whut/bootstrap.js" type="text/javascript"></script>
+    <script src="../whut/common.js"></script>
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+    <!--导航栏-->
+    <header class="in-nav container-fluid clearfix">
+    <div class="in-logo">
+        <a href="http://i.whut.edu.cn/" target="_blank">
+            <img src="../img/in-logo.jpg">
+        </a>
+    </div>
+    <div class="in-nav-list container">
+        <ul class="clearfix">
+            <li class="active"><a href="http://jwc.whut.edu.cn/Web/Index">首页</a></li>
+            <li><a href="http://jwc.whut.edu.cn/Web/List?type=010303">我的</a></li>
+        </ul>
+    </div>
+</header>
+
+
+    <div class="f-main clearfix">
+        <div class="course-nav-row clearfix">
+            <span class="hd">教师：</span>
+            <ul class="course-nav">
+                万峰老师
+            </ul>
+        </div>
+        <!-- 二级分类-end -->
+
+        <!-- 课程列表-start -->
+        <div class="types-block clearfix" style="padding:0px;">
+            <h3 style="margin-bottom: 20px;">
+                <span class="types-title" style="margin-right:40px;">课程列表</span>
+            </h3>
+            <div class="types-content clearfix" style="margin-bottom: 20px;">
+
+
+                <div class="course-card-container">
+                    <div class="course-card-top blue-bg">
+                        <span>测试</span>
+                    </div>
+                    <div class="course-card-content">
+
+                        <h3 class="course-card-name"><br>王老师</h3>
+                        <p>计算机学院</p>
+                        <p title="找Android自动化测试工作必学的主流工具、框架和自动化脚本">找Android自动化测试工作必学的主流工具、框架和自动化脚本</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- 课程列表-end -->
+
+        <!-- 分页-start -->
+        <div class="page-box clearfix">
+            <div class="page clearfix">
+                <div style="float:left;">
+                    <a class="page-next" href="javascript:void(0);" onclick="_queryPage('1')">首 页</a>
+                    <a class="page-next" href="javascript:void(0);" onclick="_queryPage('${page.pageNum-1}')">上一页</a>
+                    <a class="page-cur" href="javascript:void(0);" >1</a>
+                    <a class="page-num" href="javascript:void(0);" onclick="_queryPage('${n}');">2</a>
+                    <a class="page-num" href="javascript:void(0);" >3</a>
+                    <li style="float:left"><a>33</a></li>
+                    <a class="page-num" href="javascript:void(0);" >4</a>
+                    <a class="page-num" href="javascript:void(0);" >5</a>
+                    <a class="page-num" href="javascript:void(0);" >6</a>
+                    <a class="page-num" href="javascript:void(0);" >7</a>
+                    <span class="page-omit">...</span>
+                    <a class="page-next" href="javascript:void(0);"  onclick="_queryPage('${page.pageNum+1}')">下一页</a>
+                    <a class="page-next" href="javascript:void(0);"  onclick="_queryPage('${page.pageTotalCount!}')">尾 页</a>
+                </div>
+            </div>
+        </div>
+        <!-- 分页-end -->
+    </div>
+</body>
+</html>

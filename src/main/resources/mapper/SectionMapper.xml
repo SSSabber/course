@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeng.course.dao.SectionMapper">
+	<resultMap id="BaseResultMap" type="com.zeng.course.model.Section">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="courseId" column="courseId" jdbcType="INTEGER" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<collection property="courseFiles" ofType="com.zeng.course.model.CourseFile">
+			<id property="id" column="file_id" jdbcType="INTEGER" />
+			<result property="sectionId" column="sectionId" jdbcType="INTEGER" />
+			<result property="name" column="file_name" jdbcType="VARCHAR" />
+			<result property="intro" column="intro" jdbcType="VARCHAR" />
+			<result property="uploadTime" column="uploadTime" jdbcType="TIMESTAMP" />
+			<result property="path" column="path" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+
+	<select id="selectSectionById" resultMap="BaseResultMap" parameterType="Integer">
+		select s.id as id,courseId,s.name,f.id as file_id,sectionId,f.name as file_name,
+		intro,uploadTime,path FROM course_section s left join course_file f on s.id=f.sectionId WHERE s.id=#{id}
+		ORDER BY s.sort;
+	</select>
+
+	<select id="selectSectionByCourseId" resultMap="BaseResultMap" parameterType="Integer">
+		select s.id as id,courseId,s.name,f.id as file_id,sectionId,f.name as file_name,
+		intro,uploadTime,path FROM course_section s left join course_file f on s.id=f.sectionId WHERE s.courseId=#{id}
+	    ORDER BY s.sort;
+	</select>
+	
+	<insert id="insertSection">
+		insert into course_section (courseId,name,sort) values (#{courseId},#{sectionName},#{sort});
+	</insert>
+
+	<update id="updateSection">
+		update course_section set name=#{sectionName} where id=#{sectionId}
+	</update>
+
+	<delete id="deleteSection">
+		DELETE FROM course_section WHERE id=#{sectionId}
+	</delete>
+
+</mapper>

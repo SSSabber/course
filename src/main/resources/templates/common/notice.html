@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- saved from url=(0023)http://jwc.whut.edu.cn/ -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>教学资源平台</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link th:href="@{/whut/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/whut/index.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/whut/font-awesome.min.css}" rel="stylesheet">
+    <!--[if IE 7]>
+    <link rel="stylesheet" th:href="@{/whut/font-awesome.min.css}">
+    <![endif]-->
+
+    <script th:src="@{/whut/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/whut/bootstrap.js}" type="text/javascript"></script>
+    <script th:src="@{/whut/common.js}"></script>
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="icon" type="image/png" th:href="@{/img/whut_logo.png}" sizes="16x16">
+</head>
+
+<body>
+    <!--导航栏-->
+    <!--导航栏-->
+    <!--导航栏-->
+    <header class="in-nav container-fluid clearfix">
+        <div class="in-logo">
+            <a href="http://i.whut.edu.cn/" target="_blank">
+                <img th:src="@{/img/in-logo.jpg}">
+            </a>
+        </div>
+        <div class="in-nav-list container">
+            <ul class="clearfix">
+                <li class="active"><a th:href="@{/index}">首页</a></li>
+                <li><a th:href="@{/course/list}">课程</a></li>
+                <li><a th:href="@{/course/search}">教学资源搜索</a></li>
+                <li class="pull-right">
+                    <a th:href="@{/student/index}" target="_blank">我的</a>
+                </li>
+            </ul>
+        </div>
+        <div class="in-focus" style="margin-top:8px;" th:if="${session.studentUser}!=null">
+            <div class="weixin">
+                <a th:href="@{/student/index}">欢迎您：[[${session.studentUser.name}]]</a>
+            </div>
+            <div class="weixin">
+                <a th:href="@{/register}">注册学生或教师账号</a>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="choose container">
+
+
+        <div class="details" style="left:10%">
+
+            <div class="det-tit">
+                <h3>[[${notice.title}]]</h3>
+            </div>
+
+            <div class="det-cont" style=" min-height:300px;">
+                <p class="MsoNormal" style="text-indent:24.0pt;">
+                    [[${notice.content}]]
+                </p>
+            </div>
+        </div>
+    </div>
+</body></html>

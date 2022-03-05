@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeng.course.dao.CourseMapper">
+	<resultMap id="BaseResultMap" type="com.zeng.course.model.Course">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="college" property="college" jdbcType="VARCHAR" />
+		<result column="teacher" property="teacher" jdbcType="VARCHAR" />
+		<result column="intro" property="intro" jdbcType="VARCHAR" />
+	</resultMap>
+
+
+	<select id="selectCourse" resultMap="BaseResultMap">
+        SELECT c.id,c.name,o.name AS college,t.name AS teacher,c.intro
+		FROM course c,college o,teacher t
+		WHERE c.teacherId=t.id AND t.collegeId=o.id
+	</select>
+
+	<select id="selectCourseByParams" resultMap="BaseResultMap">
+		SELECT c.id,c.name,o.name AS college,t.name AS teacher,c.intro
+		FROM course c,college o,teacher t
+		WHERE c.teacherId=t.id AND t.collegeId=o.id
+	    <if test="collegeId!=0">AND c.collegeId= #{collegeId}</if>
+	</select>
+
+	<select id="selectCourseLimit" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT c.id,c.name,o.name AS college,t.name AS teacher,c.intro
+		FROM course c,college o,teacher t
+		WHERE c.teacherId=t.id AND t.collegeId=o.id LIMIT #{num}
+	</select>
+
+	<delete id="deleteCourseByIds"  parameterType = "java.util.List">
+		delete from course where 1>2
+		or id in
+		<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="insertCourse" parameterType="Map">
+		INSERT into course (name,teacherId,intro)
+		VALUES (#{name},#{teacherId},#{intro})
+	</insert>
+
+	<update id="updateCourse" parameterType="Map">
+		UPDATE course SET name=#{name},teacherId=#{teacherId},intro=#{intro}
+		WHERE id=#{id}
+	</update>
+
+	<select id="selectCourseById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT c.id,c.name,o.name AS college,t.name AS teacher,c.intro
+		FROM course c,college o,teacher t
+		WHERE c.teacherId=t.id AND t.collegeId=o.id AND c.id=#{id}
+	</select>
+
+	<select id="selectTeacherIdByCourseId" resultType="Integer" parameterType="Integer">
+		SELECT t.id FROM course c,teacher t
+		WHERE t.id=c.teacherId AND c.id=#{id};
+	</select>
+
+	<select id="isCourseFollow" resultType="Integer" parameterType="Integer">
+		select id
+		from course_follow  WHERE courseId=#{courseId} AND studentId=#{studentId};
+	</select>
+
+	<insert id="insertCourseFollow" parameterType="Integer">
+		insert into course_follow(courseId,studentId)
+		VALUES (#{courseId},#{studentId});
+	</insert>
+
+	<delete id="deleteCourseFollow" parameterType="Integer">
+		DELETE FROM course_follow
+		WHERE  courseId=#{courseId} AND studentId=#{studentId};
+	</delete>
+
+	<select id="selectCourseFollowId" resultType="Integer" parameterType="Integer">
+		SELECT courseId from course_follow
+		where studentId=#{studentId}
+	</select>
+
+	<select id="selectCourseIdByTeacherId" resultType="Integer" parameterType="Integer">
+		select id from course WHERE teacherId=#{teacherId}
+	</select>
+
+</mapper>

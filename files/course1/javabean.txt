@@ -1,0 +1,192 @@
+public class Admin {
+    private Integer id;
+    private String name;
+    private String account;
+    private String password;
+    private String state;
+    private Integer isdel;
+}
+
+public class Collect {
+    private static final long serialVersionUID = 330537511405187874L;
+    private Integer id;
+    /** 学生id*/
+    private Integer stuId;
+    /** 课程id*/
+    private Integer cId;   
+    private String status;
+}
+
+
+public class College {
+    private Integer id;
+    private String name;
+    private String state;
+    private Integer isdel;
+    private String intro;
+}
+
+
+public class Course {
+    private Integer id;
+    private String name;
+    private Integer collegeId;
+    private Integer teacherId;
+    private String num;
+    private String path;
+    private String state;
+    private Integer isdel;
+    private String intro;   
+    //添加 学院名
+    private String collegeName;
+}
+
+
+public class CourseFile {
+    private Integer id;
+    private String path;
+    private Integer courseId;
+    private Date recordTime;
+    private Integer teacherId;
+    private String state;
+    private Integer isdel;   
+    //添加  课程名
+    private String courseName;    
+    //添加教师名
+    private String teacherName;
+}
+
+
+public class CourseVideo {
+    private Integer id;
+    private String path;
+    private Integer courseId;
+    private Date recordTime;
+    private Integer teacherId;
+    private String state;
+    private Integer isdel;   
+    //添加 课程名
+    private String courseName;    
+    //添加教师名
+    private String teacherName;
+}
+
+
+public class Discuss {
+    private Integer id;
+    private String title;
+    private Integer teacherId;
+    private Date recordTime;
+    private Integer courseId;
+    private String state;
+    private Integer isdel
+    private String content;   
+   //添加 课程名
+   private String courseName;
+   //添加 教师名
+   private String teacherName;
+}
+
+
+public class DiscussPost {
+    private Integer id;
+    private Integer discussId;
+    private Integer studentId;
+    private Date recordTime;
+    private String state;
+    private Integer isdel;
+    private String content;    
+    //添加 学生名
+    private String studentName;
+}
+
+
+public class Notice {
+    private Integer id;
+    private String title;
+    private Date recordTime;
+    private String state;
+    private Integer isdel;
+    private String content;
+}
+
+
+public class Student {
+    private Integer id;
+    private String account;
+    private String password;
+    private String name;
+    private Integer gender;
+    private String num;
+    private Integer collegeId;
+    private String telphone;
+    private String idCardNo;
+    private String state;
+    private Integer isdel;    
+    //添加 学院名称
+    private String collegeName;
+    //性别
+    private String genderName;
+}
+
+
+public class StudentTask {
+    private Integer id;
+    private Integer studentId;
+    private Integer taskId;
+    private Integer score;
+    private Date recordTime;
+    private String state;
+    private Integer isdel;   
+    //添加 考试名称
+    private String taskName;
+    //学生名
+    private String studentName;
+    //学院名
+    private String collegeName;
+}
+
+
+public class Task {
+    private Integer id;
+    private Integer teacherId;
+    private Integer courseId;
+    private Date recordTime;
+    private String state;
+    private Integer isdel;    
+    //课程名
+    private String courseName;
+    //教师
+    private String teacherName;
+}
+
+
+public class TaskQuestion {
+    private Integer id;
+    private String title;
+    private String itemA;
+    private String itemB;
+    private String itemC;
+    private String itemD;
+    private String answer;
+    private Integer taskId;
+    private Integer score;
+    private String state;
+    private Integer isdel;
+}
+
+
+public class Teacher {
+    private Integer id;
+    private String account;
+    private String password;
+    private String name;
+    private Integer gender;
+    private String num;
+    private Integer collegeId;
+    private Integer courseId;
+    private String telphone;
+    private String idCardNo;
+    private String state;
+    private Integer isdel;
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <title>登录-教学平台</title>
+
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <!-- Font Awesome -->
+    <!-- Ionicons -->
+    <!-- Theme style -->
+    <!-- iCheck -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../plugins/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/iCheck/square/blue.css">
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo" style="color:darkblue">
+
+            <img src="../img/whut_logo.png" style="height: 58px;margin-left:0px;">
+            <b>教学资源平台</b>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg"><b>用户登录</b></p>
+            <form action="all-admin-index.html" method="get">
+                <div class="form-group has-feedback">
+                    <span class="fa fa-user form-control-feedback"></span>
+                    <input type="text" id="userName" name="userName" class="form-control" placeholder="请输入账号"
+                           required="true">
+                </div>
+                <div class="form-group has-feedback">
+                    <span class="fa fa-lock form-control-feedback"></span>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码"
+                           required="true">
+                </div>
+
+                <div class="form-group has-feedback">
+                    <select class="form-control select2" style="width: 100%;">
+                        <option selected="selected">学生</option>
+                        <option>教师</option>
+                        <option>管理员</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 data text">
+                        <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码" required="true">
+                    </div>
+                    <div class="col-3">
+                        <img alt="单击图片刷新！" class="pointer" src="/common/kaptcha"
+                             onclick="this.src='/common/kaptcha?d='+new Date()*1">
+                    </div>
+                </div>
+
+
+                <div class="form-group has-feedback"></div>
+                <div class="row">
+                    <div class="col-8">
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">登录
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group has-feedback"></div>
+
+
+                <div style="text-align: center" class="text-red"><b>账号或密码错误</b></div>
+
+            </form>
+
+            <div class="social-auth-links text-center">
+            <a href="all-admin-register.html" class="text-center">新用户注册</a>
+
+            </div>
+        <!-- /.login-box-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery 2.2.3 -->
+    <!-- Bootstrap 3.3.6 -->
+    <!-- iCheck -->
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../plugins/iCheck/icheck.min.js"></script>
+    <style type="text/css">
+        .login-page {
+            background: url("../img/whut_lib.jpeg") no-repeat center center fixed;
+            background-size: cover;
+        }
+        /*.ceter{ width:700px; height:700px; border:1px solid #F00; text-align:center; line-height:700px;}*/
+    </style>
+    <script>
+        $(function() {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+    </script>
+</body>
+
+</html>

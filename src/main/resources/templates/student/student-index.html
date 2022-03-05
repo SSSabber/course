@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<head th:replace="student/header::header-fragment"></head>-->
+<head th:replace="student/header::header-fragment">
+</head>
+
+<body class="hold-transition skin-blue-light sidebar-mini">
+
+<div class="wrapper">
+
+    <!-- 页面头部 -->
+    <!-- 引入页面头header-fragment -->
+    <header th:replace="student/header::header-nav"></header>
+    <!-- 页面头部 /-->
+
+    <!-- 导航侧栏 -->
+    <aside th:replace="student/sidebar::sidebar-fragment"></aside>
+
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+
+            <!-- 内容头部 -->
+            <section class="content-header">
+                <h1>
+                    学生
+                    <small>首页</small>
+                </h1>
+            </section>
+            <!-- 内容头部 /-->
+
+            <!-- 正文区域 -->
+            <section class="content">
+                <p>
+                    <b>平台中学生用户的功能</b><br>
+                    (1)	全文检索资源：能对平台上上传的所有格式的资源进行全文检索。平台会根据学生提供的关键字或关键词对资源的标题、资源的介绍、资源所属章节、课程信息、 授课老师等信息进行全文检索，资源的信息会按照相关度进行排序和资源的下载链接一起展示给用户。<br>
+                    (2)	下载资源：学生用户能把平台上的资源下载在本地，学生进入学生后台上能查看和删除自己的下载记录。<br>
+                    (3)	查看通知：管理员发布了新闻通知后，学生能在平台主页上查看到通知。<br>
+                    (4)	查看课程：学生能在平台上预览所有课程。同时学生能够筛选特定专业和教师的课程。学生点击课程信息能够查看课程的章节和课程下所有的资源。<br>
+                    (5)	收藏课程和教师关注：学生能够在课程的页面上对感兴趣的课程进行收藏，对教师进行关注。登录教学资源的后台后可以看到自己的收藏列表。<br>
+                    (6)	上传作业：学生在课程页面中能上传作业给教师。<br>
+                    (7)	个人信息修改：所有用户在教学资源平台上都能修改自己的个人信息。<br>
+                </p>
+            </section>
+            <!-- 正文区域 /-->
+
+        </div>
+        <!-- 内容区域 /-->
+
+
+    </div>
+
+
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/jQueryUI/jquery-ui.min.js"></script>
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../plugins/raphael/raphael-min.js"></script>
+    <script src="../plugins/morris/morris.min.js"></script>
+    <script src="../plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="../plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="../plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../plugins/knob/jquery.knob.js"></script>
+    <script src="../plugins/daterangepicker/moment.min.js"></script>
+    <script src="../plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="../plugins/daterangepicker/daterangepicker.zh-CN.js"></script>
+    <script src="../plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="../plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+    <script src="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="../plugins/fastclick/fastclick.js"></script>
+    <script src="../plugins/iCheck/icheck.min.js"></script>
+    <script src="../plugins/studentLTE/js/app.min.js"></script>
+    <script src="../plugins/treeTable/jquery.treetable.js"></script>
+    <script src="../plugins/select2/select2.full.min.js"></script>
+    <script src="../plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="../plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.zh-CN.js"></script>
+    <script src="../plugins/bootstrap-markdown/js/bootstrap-markdown.js"></script>
+    <script src="../plugins/bootstrap-markdown/locale/bootstrap-markdown.zh.js"></script>
+    <script src="../plugins/bootstrap-markdown/js/markdown.js"></script>
+    <script src="../plugins/bootstrap-markdown/js/to-markdown.js"></script>
+    <script src="../plugins/ckeditor/ckeditor.js"></script>
+    <script src="../plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="../plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+    <script src="../plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="../plugins/chartjs/Chart.min.js"></script>
+    <script src="../plugins/flot/jquery.flot.min.js"></script>
+    <script src="../plugins/flot/jquery.flot.resize.min.js"></script>
+    <script src="../plugins/flot/jquery.flot.pie.min.js"></script>
+    <script src="../plugins/flot/jquery.flot.categories.min.js"></script>
+    <script src="../plugins/ionslider/ion.rangeSlider.min.js"></script>
+    <script src="../plugins/bootstrap-slider/bootstrap-slider.js"></script>
+    <script src="../plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+    <script src="../plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 选择框
+            $(".select2").select2();
+
+            // WYSIHTML5编辑器
+            $(".textarea").wysihtml5({
+                locale: 'zh-CN'
+            });
+        });
+
+
+        // 设置激活菜单
+        function setSidebarActive(tagUri) {
+            var liObj = $("#" + tagUri);
+            if (liObj.length > 0) {
+                liObj.parent().parent().addClass("active");
+                liObj.addClass("active");
+            }
+        }
+
+
+        $(document).ready(function() {
+            // 激活导航位置
+            setSidebarActive("student-index");
+        });
+    </script>
+</body>
+
+</html>
+<!---->

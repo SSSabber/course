@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <title>注册-教学资源平台</title>
+
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <!-- Font Awesome -->
+    <!-- Ionicons -->
+    <!-- Theme style -->
+    <!-- iCheck -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+    <link rel="stylesheet" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/ionicons/css/ionicons.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/adminLTE/css/AdminLTE.css}">
+    <link rel="stylesheet" th:href="@{/plugins/iCheck/square/blue.css}">
+    <link rel="icon" type="image/png" th:href="@{/img/whut_logo.png}" sizes="16x16">
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo" style="color:darkblue">
+
+            <img th:src="@{/img/whut_logo.png}" style="height: 58px;margin-left:0px;">
+            <a th:href="@{/index}"><b>教学资源平台</b></a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg"><b>用户注册</b></p>
+            <div th:if="${not #strings.isEmpty(session.errorMsg2)}" class="form-group">
+                <div class="text-red" style="text-align: center"><b>[[${session.errorMsg2}]]</b></div>
+            </div>
+            <form action="/register" method="post">
+                <div class="form-group has-feedback">
+                    <span class="fa fa-user form-control-feedback"></span>
+                    <input type="text" id="userName" name="username" class="form-control" placeholder="请输入账号"
+                           th:value="${username}" required="true">
+                </div>
+                <div class="form-group has-feedback">
+                    <span class="fa fa-lock form-control-feedback"></span>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="请输入密码"
+                           th:value="${password}" required="true">
+                </div>
+                <div class="form-group has-feedback">
+                    <span class="fa fa-lock form-control-feedback"></span>
+                    <input type="password" id="password2" name="password2" class="form-control" placeholder="确认密码"
+                           th:value="${password2}" required="true">
+                </div>
+
+                <div class="form-group has-feedback">
+                    <span class="fa fa-child form-control-feedback"></span>
+                    <input name="name" class="form-control" placeholder="请输入姓名"
+                           th:value="${name}" required="true">
+                </div>
+                <div class="form-group has-feedback">
+                    <span class="fa fa-id-badge form-control-feedback"></span>
+                    <input   name="num" class="form-control" placeholder="请输入学号/教师编号"
+                             th:value="${num}" required="true">
+                </div>
+
+                <div class="form-group has-feedback">
+                <select class="form-control select2" style="width: 100%;" name="status">
+                    <option selected="selected" value="0" th:selected="${status}=='0'?'true':'false'">学生</option>
+                    <option value="1" th:selected="${status}=='1'?'true':'false'">教师</option>
+                </select>
+                </div>
+                <div class="form-group has-feedback">
+                    <select class="form-control select2" style="width: 100%;" name="collegeId">
+                        <option value="1" selected="selected" th:selected="${collegeId}=='1'?'true':'false'">计算机学院</option>
+                        <option value="2" th:selected="${collegeId}=='2'?'true':'false'">信息学院</option>
+                        <option value="3" th:selected="${collegeId}=='3'?'true':'false'">外国语学院</option>
+                        <option value="4" th:selected="${collegeId}=='4'?'true':'false'">材料学院</option>
+                        <option value="5" th:selected="${collegeId}=='5'?'true':'false'">航海学院</option>
+                        <option value="6" th:selected="${collegeId}=='6'?'true':'false'">物流学院</option>
+                        <option value="7" th:selected="${collegeId}=='7'?'true':'false'">理学院</option>
+                        <option value="8" th:selected="${collegeId}=='8'?'true':'false'">马克思学院</option>
+                        <option value="9" th:selected="${collegeId}=='9'?'true':'false'">政治学院</option>
+                        <option value="10" th:selected="${collegeId}=='10'?'true':'false'">土木学院</option>
+                        <option value="11" th:selected="${collegeId}=='11'?'true':'false'">机械学院</option>
+                    </select>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <select class="form-control select2" style="width: 100%;" name="gender">
+                        <option selected="selected" value="0" th:selected="${gender}=='0'?'true':'false'">男</option>
+                        <option value="1" th:selected="${gender}=='1'?'true':'false'">女</option>
+                    </select>
+                </div>
+
+                    <div class="form-group has-feedback">
+                        <span class="fa fa-phone-square form-control-feedback"></span>
+                        <input   name="tel" class="form-control" placeholder="请输入联系方式"
+                                 th:value="${tel}" required="false">
+                    </div>
+
+                <div class="row">
+                    <div class="col-md-6 data text">
+                        <input type="text" class="form-control" name="verifyCode" placeholder="请输入验证码" required="true">
+                    </div>
+                    <div class="col-3">
+                        <img alt="单击图片刷新！" class="pointer" src="/common/kaptcha"
+                             onclick="this.src='/common/kaptcha?d='+new Date()*1">
+                    </div>
+                </div>
+
+
+                <div class="form-group has-feedback"></div>
+
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">注册
+                    </button>
+                </div>
+            </form>
+            <div class="social-auth-links text-center">
+                <a href="login" class="text-center">已有账号,点击登录界面</a>
+
+            </div>
+        <!-- /.login-box-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery 2.2.3 -->
+    <!-- Bootstrap 3.3.6 -->
+    <!-- iCheck -->
+    <script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/plugins/iCheck/icheck.min.js}"></script>
+    <style type="text/css">
+        .login-page {
+            background: url("../img/photo1.png") no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
+    <script>
+        $(function() {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+        });
+
+    </script>
+</body>
+
+</html>

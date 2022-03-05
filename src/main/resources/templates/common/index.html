@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>教学资源平台</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link th:href="@{/whut/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/whut/index.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/whut/font-awesome.min.css}" rel="stylesheet">
+    <!--[if IE 7]>
+    <link rel="stylesheet" th:href="@{/whut/font-awesome.min.css}">
+    <![endif]-->
+
+    <script th:src="@{/whut/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/whut/bootstrap.js}" type="text/javascript"></script>
+    <script th:src="@{/whut/common.js}"></script>
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="icon" type="image/png" th:href="@{/img/whut_logo.png}" sizes="16x16">
+</head>
+
+<body>
+    <!--导航栏-->
+    <header class="in-nav container-fluid clearfix">
+    <div class="in-logo">
+        <a href="http://i.whut.edu.cn/" target="_blank">
+            <img th:src="@{/img/in-logo.jpg}">
+        </a>
+    </div>
+        <div class="in-nav-list container">
+            <ul class="clearfix">
+                <li class="active"><a th:href="@{/index}">首页</a></li>
+                <li><a th:href="@{/course/list}">课程</a></li>
+                <li><a th:href="@{/course/search}">教学资源搜索</a></li>
+                <li class="pull-right">
+                    <a th:href="@{/student/index}" target="_blank">学生端</a>
+                </li>
+                <li class="pull-right">
+                    <a th:href="@{/teacher/index}" target="_blank">教师端</a>
+                </li>
+                <li class="pull-right">
+                    <a th:href="@{/admin/index}" target="_blank">管理员端</a>
+                </li>
+            </ul>
+        </div>
+        <div class="in-focus" style="margin-top:8px;" th:if="${session.studentUser}==null">
+        <div class="weixin">
+            <a th:href="@{/login}">登录教学资源平台</a>
+        </div>
+        <div class="weixin">
+            <a th:href="@{/register}">注册学生或教师账号</a>
+        </div>
+        </div>
+        <div class="in-focus" style="margin-top:8px;" th:if="${session.studentUser}!=null">
+            <div class="weixin">
+                <a th:href="@{/student/index}">欢迎您：[[${session.studentUser.name}]]</a>
+            </div>
+            <div class="weixin">
+                <a th:href="@{/register}">注册学生或教师账号</a>
+            </div>
+        </div>
+</header>
+
+
+    <!-- banner & 常用系统 -->
+    <div  style="background-image: url(../img/whut_lib2.jpeg);">
+        <div class="in-system container">
+            <div class="sys-inner">
+                <div class="sys-tit"><h4>课程学院</h4></div>
+                <div class="sys-list">
+                    <ul>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>计算机科学与技术学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>外国语学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>材料学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>航海学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>物流学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>理学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>马克思学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>政治学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>土木学院</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">
+                                <i></i>
+                                <span>机械学院</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="in-body container">
+
+        <div class="in-news">
+            <div class="news-box">
+                <div class="news-cont">
+                    <div class="news-tit">
+                        <h4>通知公告</h4>
+                        <span>notice center</span>
+                        <a href="#">查看更多</a>
+                    </div>
+                    <div class="news-list" style="min-height:300px;">
+                        <ul>
+                            <li th:each="notice: ${notices}">
+                                <a th:href="@{/notice(id=${notice.id})}" class="clearfix">
+                                    <span th:text="${#dates.format(notice.getRecord_time(), 'yyyy-MM-dd')}"></span>
+                                    <div class="list-tt"><h6>[[${notice.title}]]</h6>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!--常用链接-->
+        <div class="in-link">
+            <div class="link-box">
+                <div class="news-tit">
+                    <h4>精品推荐</h4>
+                    <span>Recommend</span>
+                </div>
+                <div class="link-list link-list-up">
+                    <h4>课程推荐</h4>
+                    <ul class="clearfix">
+                        <li th:each="course: ${courses}">
+                            <a th:href="@{/course/learn(id=${course.id})}" target="_blank">
+                            <i class="fa fa-book"></i>
+                            <span>[[${course.name}]]-[[${course.college}]]-[[${course.teacher}]]</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="link-list link-list-down">
+                    <h4>教师推荐</h4>
+                    <ul class="clearfix">
+                        <li th:each="teacher: ${teachers}">
+                            <a href="#" target="_blank">
+                                <i class="fa fa-user"></i>
+                                <span>[[${teacher.name}]]-[[${teacher.college}]]</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <!--悬浮窗口-->
+
+    <div class="go-up">
+     <ul>
+       
+    </ul> 
+        <a class="icon-reply" href="javascript:scroll(0,0)"></a>
+    </div>
+    </div>
+
+
+</body>
+</html>

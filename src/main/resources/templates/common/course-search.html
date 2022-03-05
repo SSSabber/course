@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!-- saved from url=(0023)http://jwc.whut.edu.cn/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <title>教学资源平台</title>
+    <link th:href="@{/whut/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/whut/index.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/whut/font-awesome.min.css}" rel="stylesheet">
+    <!--[if IE 7]>
+    <link rel="stylesheet" th:href="@{/whut/font-awesome.min.css}">
+    <![endif]-->
+    <link th:href="@{/css/reset.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{/whut/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/whut/bootstrap.js}" type="text/javascript"></script>
+    <script th:src="@{/whut/common.js}"></script>
+    <link rel="stylesheet" th:href="@{/plugins/font-awesome/css/font-awesome.min.css}">
+    <link rel="icon" type="image/png" th:href="@{/img/whut_logo.png}" sizes="16x16">
+    <link rel="stylesheet" th:href="@{/plugins/adminLTE/css/AdminLTE.css}">
+</head>
+
+<body>
+    <!--导航栏-->
+    <header class="in-nav container-fluid clearfix">
+        <div class="in-logo">
+            <a href="http://i.whut.edu.cn/" target="_blank">
+                <img th:src="@{/img/in-logo.jpg}">
+            </a>
+        </div>
+        <div class="in-nav-list container">
+            <ul class="clearfix">
+                <li class="active"><a th:href="@{/index}">首页</a></li>
+                <li><a th:href="@{/course/list}">课程</a></li>
+                <li><a th:href="@{/course/search}">教学资源搜索</a></li>
+                <li class="pull-right">
+                    <a th:href="@{/student/index}" target="_blank">我的</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+<div class="f-main clearfix">
+    <form class="navbar-form text-center" th:href="@{/course/search}" method="get">
+        <input type="text" class="form-control" style="width:50%;left: 25%" name="queryString" placeholder="请输入想要查找的内容" th:value="${queryString}">
+        <button type="submit"  class="btn btn-primary"><i class="fa fa-search"></i> 查询</button>
+    </form>
+    <hr>
+    <div style="text-align: center" th:if="${pageResult.pageNum}!=0">
+        <h3>
+            查询结果
+        </h3>
+    </div>
+    <div class="content">
+            <!-- .box-body -->
+            <div class="box box-success" style="width: 80%;left: 10%" th:each="searchModel:${pageResult.content}">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><b>文件名：</b><span th:utext="${searchModel.courseFile.name}"/></h3>
+                </div>
+                <div class="box-body">
+                    <b>文件介绍: </b><span th:utext="${searchModel.courseFile.intro}"/><br>
+                    <b>课程名称：</b><span th:utext="${searchModel.course.name}"/><br>
+                    <b>课程介绍: </b><span th:utext="${searchModel.course.intro}"/><br>
+                    <b>章节名称：</b><span th:utext="${searchModel.section.name}"/><br>
+                    <b>所属学院：</b><span th:utext="${searchModel.course.college}"/><br>
+                    <b>所属教师：</b><span th:utext="${searchModel.course.teacher}"/>
+                </div>
+                <div class="box-footer">
+                    <a class="btn btn-primary" th:href="@{/course/download(fileId=${searchModel.courseFile.id},path=${searchModel.courseFile.path},fileName=${searchModel.courseFile.name})}">下载文件</a>
+                    <a class="btn btn-danger"  th:href="@{/course/learn(id=${searchModel.course.id})}" target="_blank">查看课程</a>
+                </div>
+                <!-- 数据表格 /-->
+            </div>
+            <!-- /.box-body -->
+    </div>
+    <!-- 内容区域 /-->
+
+    <!--分页开始-->
+    <div class="page-box clearfix" th:if="${pageResult.pageNum}!=0">
+        <div class="page clearfix">
+            <div style="float:left;">
+                <a class="page-next" th:href="@{/course/search(queryString=${queryString})}" >首 页</a>
+                <a class="page-next" th:href="@{/course/search(pageNum=${pageResult.pageNum}>1?${pageResult.pageNum}-1:1,queryString=${queryString})}">上一页</a>
+                <li th:each="page:${#numbers.sequence(1, pageResult.totalPages)}" style="float: left;">
+                    <a th:class="${pageResult.pageNum}==${page}?'page-cur':'page-num'" th:href="@{/course/search(pageNum=${page},queryString=${queryString})}">[[${page}]]</a>
+                </li>
+                <a class="page-next"  th:href="@{/course/search(pageNum=${pageResult.totalPages}>${pageResult.pageNum}?${pageResult.pageNum}+1:1,queryString=${queryString})}">下一页</a>
+                <a class="page-next" th:href="@{/course/search(pageNum=${pageResult.totalPages},queryString=${queryString})}">尾 页</a>
+            </div>
+        </div>
+    </div>
+    <!--分页结束/-->
+    <br><br><br><br>
+</div>
+
+</body>
+</html>

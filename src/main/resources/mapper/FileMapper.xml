@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeng.course.dao.FileMapper">
+	<resultMap id="FileDownloadMap" type="com.zeng.course.model.File_download">
+		<id property="id" column="id" jdbcType="INTEGER" />
+		<result property="studentId" column="studentId" jdbcType="INTEGER" />
+		<result property="downloadTime" column="downloadTime" jdbcType="TIMESTAMP" />
+		<collection property="courseFile" ofType="com.zeng.course.model.CourseFile">
+			<id property="id" column="file_id" jdbcType="INTEGER" />
+			<result property="sectionId" column="sectionId" jdbcType="INTEGER" />
+			<result property="name" column="file_name" jdbcType="VARCHAR" />
+			<result property="intro" column="intro" jdbcType="VARCHAR" />
+			<result property="uploadTime" column="uploadTime" jdbcType="TIMESTAMP" />
+			<result property="path" column="path" jdbcType="VARCHAR" />
+		</collection>
+	</resultMap>
+
+
+	<select id="selectFileList" resultType="com.zeng.course.model.CourseFile">
+		select * from course_file;
+	</select>
+
+	<select id="selectFileById" resultType="com.zeng.course.model.CourseFile" parameterType="Integer">
+		select id,sectionId,name,intro,path,uploadTime
+		from course_file where id=#{id}
+	</select>
+
+	<insert id="insertFileDownload" parameterType="Integer">
+		INSERT into file_download(studentId,fileId) value(#{studentId},#{fileId})
+	</insert>
+
+	<select id="selectFileDownloadByStudentId" parameterType="Integer" resultMap="FileDownloadMap">
+		select d.id,d.studentId,f.id as file_id,f.sectionId,f.name as file_name,f.intro,f.uploadTime,f.path,d.downloadTime
+		from file_download d join course_file as f on d.fileId=f.id where d.studentId=#{studentId}
+	</select>
+
+	<delete id="deleteFileDownloads"  parameterType = "java.util.List">
+		delete from file_download where 1>2
+		or id in
+		<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			#{item}
+		</foreach>
+	</delete>
+
+	<delete id="deleteFileByIds"  parameterType = "java.util.List">
+		delete from course_file where 1>2
+		or id in
+		<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="insertFile">
+		INSERT into course_file(sectionId,name,intro,path) values (#{sectionId},#{name},#{intro},#{path})
+	</insert>
+
+	<update id="updateFile">
+		UPDATE course_file SET sectionId=#{sectionId},name=#{name},intro=#{intro},path=#{path} WHERE id=#{fId}
+	</update>
+
+</mapper>

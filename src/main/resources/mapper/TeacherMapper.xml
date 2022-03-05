@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeng.course.dao.TeacherMapper">
+	<resultMap id="BaseResultMap" type="com.zeng.course.model.Teacher">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="teacherNum" property="teacherNum" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="college" property="college" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="VARCHAR" />
+		<result column="tel" property="tel" jdbcType="VARCHAR" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="login" resultMap="BaseResultMap">
+		SELECT t.id,t.teacherNum, t.name, c.name AS college,
+        CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,t.tel,t.username,t.password FROM
+		teacher AS t JOIN college AS c ON t.collegeId = c.id WHERE username=#{username} and password=#{password};
+	</select>
+
+	<select id="selectTeacher" resultMap="BaseResultMap">
+		SELECT t.id,t.teacherNum, t.name, c.name AS college,
+        CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,t.tel,t.username,t.password FROM
+		teacher AS t JOIN college AS c ON t.collegeId = c.id
+	</select>
+
+	<select id="selectTeacherByParams" resultMap="BaseResultMap">
+		SELECT t.id,t.teacherNum, t.name, c.name AS college,
+		CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,t.tel,t.username,t.password FROM
+		teacher AS t JOIN college AS c ON t.collegeId = c.id
+		<where>
+			<if test="collegeId!=0">t.collegeId= #{collegeId}</if>
+			<if test="name!='教师姓名'">AND t.name like "%"#{name}"%"</if>
+		</where>
+	</select>
+
+	<select id="selectTeacherLimit" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT t.id,t.teacherNum, t.name, c.name AS college,
+		CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,t.tel,t.username,t.password FROM
+		teacher AS t JOIN college AS c ON t.collegeId = c.id LIMIT #{num}
+	</select>
+
+	<delete id="deleteTeacherByIds"  parameterType = "java.util.List">
+		delete from teacher where 1>2
+		or id in
+		<foreach collection="list"  item="item" open="(" separator="," close=")"  >
+			#{item}
+		</foreach>
+	</delete>
+
+	<insert id="insertTeacher" parameterType="Map">
+		INSERT into teacher (name, teacherNum,collegeId, gender,tel,
+		username, password) VALUES (#{name}, #{teacherNum},#{collegeId}, #{gender},#{tel},#{username}, #{password})
+	</insert>
+
+	<update id="updateTeacher" parameterType="Map">
+	UPDATE teacher SET name=#{name}, teacherNum=#{teacherNum},collegeId=#{collegeId}, gender=#{gender},tel=#{tel},
+	username=#{username}, password=#{password} WHERE id=#{id}
+   </update>
+
+	<update id="updateTeacherByModel" parameterType="Map">
+		UPDATE teacher SET name=#{name},tel=#{tel},
+		username=#{username}, password=#{password} WHERE id=#{id}
+	</update>
+
+	<select id="selectTeacherByTeacherNum" resultMap="BaseResultMap" parameterType="String">
+		SELECT t.id,t.teacherNum, t.name, c.name AS college,
+        CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,t.tel,t.username,t.password FROM
+		teacher AS t JOIN college AS c ON t.collegeId = c.id WHERE t.teacherNum=#{teacherNum}
+	</select>
+
+	<select id="selectTeacherById" resultMap="BaseResultMap" parameterType="Integer">
+		SELECT t.id,t.teacherNum, t.name, c.name AS college,
+		CASE gender WHEN 0 THEN "男" ELSE "女" END AS gender,t.tel,t.username,t.password FROM
+		teacher AS t JOIN college AS c ON t.collegeId = c.id WHERE t.id=#{id}
+	</select>
+	
+	<select id="selectTeacherFollow" resultType="Integer" parameterType="Integer">
+		SELECT id from teacher_follow
+		where teacherId=#{teacherId} and studentId=#{studentId}
+	</select>
+
+	<insert id="insertTeacherFollow" parameterType="Integer">
+		insert into teacher_follow(teacherId,studentId)
+		VALUES (#{teacherId},#{studentId});
+	</insert>
+
+	<delete id="deleteTeacherFollow" parameterType="Integer">
+		DELETE FROM teacher_follow
+		WHERE  teacherId=#{teacherId} AND studentId=#{studentId};
+	</delete>
+
+	<select id="selectTeacherFollowId" parameterType="Integer" resultType="Integer">
+		select teacherId
+		from teacher_follow where studentId=#{studentId}
+	</select>
+
+</mapper>

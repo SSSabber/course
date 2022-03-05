@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zeng.course.dao.HomeworkMapper">
+	<resultMap id="HomeworkMap" type="com.zeng.course.model.Homework">
+		<id  property="id" column="id" jdbcType="INTEGER" />
+		<result property="courseId" column="courseId" jdbcType="INTEGER" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="intro" column="intro" jdbcType="VARCHAR" />
+		<result property="time" column="time" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<resultMap id="UploadMap" type="com.zeng.course.model.Homework_upload">
+		<id property="id" column="id"  jdbcType="INTEGER" />
+		<result property="student" column="studentName" jdbcType="VARCHAR" />
+		<result property="uploadTime" column="uploadTime" jdbcType="TIMESTAMP" />
+		<result property="score" column="score" jdbcType="INTEGER" />
+		<collection property="homework" ofType="com.zeng.course.model.Homework">
+			<id property="id" column="homeworkId"  jdbcType="INTEGER" />
+			<result property="courseId" column="courseId" jdbcType="INTEGER" />
+			<result property="name" column="name" jdbcType="VARCHAR" />
+			<result property="intro" column="intro" jdbcType="VARCHAR" />
+			<result property="time" column="time" jdbcType="TIMESTAMP" />
+		</collection>
+	</resultMap>
+
+	<select id="selectHomeworkByCourseId" resultMap="HomeworkMap">
+		select id,courseId,name,intro,time
+		from course_homework
+		where courseId=#{courseId}
+	</select>
+
+	<select id="selectHomeworkUpload" resultMap="UploadMap">
+		SELECT u.id,s.name as studentName,u.uploadTime,score,h.id as homework_id,courseId,h.name,h.intro,h.time
+		from homework_upload u JOIN course_homework h on u.homeworkId=h.id
+		JOIN student s on u.studentId=s.id
+		where u.homeworkId=#{homeworkId} and u.studentId=#{studentId}
+	</select>
+
+	<insert id="uploadHomework">
+		INSERT into homework_upload(homeworkId,studentId,path)
+		values(#{homeworkId},#{studentId},#{pathName})
+	</insert>
+
+	<select id="selectHomeworkUploadByStudentId" resultMap="UploadMap">
+		SELECT u.id,s.name as studentName,u.uploadTime,score,h.id as homework_id,courseId,h.name,h.intro,h.time
+		from homework_upload u JOIN course_homework h on u.homeworkId=h.id
+		JOIN student s on u.studentId=s.id
+		where u.studentId=#{studentId}
+	</select>
+
+	<select id="selectUploadsByCourseId" resultMap="UploadMap">
+		SELECT u.id,s.name as studentName,u.uploadTime,score,h.id as homework_id,courseId,h.name,h.intro,h.time
+		from homework_upload u JOIN course_homework h on u.homeworkId=h.id
+		JOIN student s on u.studentId=s.id
+		where h.courseId=#{courseId}
+	</select>
+
+	<update id="updateScore">
+		UPDATE homework_upload set score=#{score} WHERE id=#{id}
+	</update>
+</mapper>

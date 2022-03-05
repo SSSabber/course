@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<aside class="main-sidebar" th:fragment="sidebar-fragment">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img th:src="@{/img/user4-128x128.jpg}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>[[${session.studentUser.name}]]</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+            </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">菜单</li>
+            <li id="student-index"><a th:href="@{/student/index}"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
+            <li id="student-course"><a th:href="@{/student/course}"><i class="fa fa-align-center"></i> <span>课程收藏</span></a></li>
+            <li id="student-teacher"><a th:href="@{/student/teacher}"><i class="fa fa-user"></i> <span>老师关注</span></a></li>
+            <li id="student-file"><a th:href="@{/student/file}"><i class="fa fa-file"></i> <span>资源下载</span></a></li>
+            <li id="student-homework"><a th:href="@{/student/homework}"><i class="fa fa-file-text"></i> <span>作业情况</span></a></li>
+            <li id="student-edit"><a th:href="@{/student/edit}"><i class="fa fa-cog"></i> <span>修改账号密码</span></a></li>
+            <li id="student-logout"><a th:href="@{/student/logout}"><i class="fa fa-sign-out"></i> <span>安全退出</span></a></li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
+<!-- 导航侧栏 /-->
